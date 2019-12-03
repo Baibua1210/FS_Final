@@ -28,7 +28,7 @@ function updateProductById(req, res) {
     var payload = req.body
     var pid = req.params.pid;
     // #7 Update a product by ID (findByIdAndUpdate)
-
+    var products = new payload(newproduct);
     // ===============================
 }
 
