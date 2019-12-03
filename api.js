@@ -8,31 +8,32 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
 
 function getAllProducts(req, res) {
 
-    Product.find({}, function (err, data) {   
-        if(err){
-            res.status(500).json({ status: "error", message: err});
-        }     
+    Product.find({}, function (err, data) {
+        if (err) {
+            res.status(500).json({ status: "error", message: err });
+        }
         res.json(data);
     });
 }
 
 function getProductById(req, res) {
-    var pid = req.params.pid;    
+    var pid = req.params.pid;
     // #6 Get a product by ID
-    
+    var products = document.getElementById("products").innerHTML;
+    console.log(products);
     // ===============================
 }
 
 function updateProductById(req, res) {
     var payload = req.body
-    var pid = req.params.pid;    
+    var pid = req.params.pid;
     // #7 Update a product by ID (findByIdAndUpdate)
 
     // ===============================
 }
 
 function deleteProductById(req, res) {
-    var pid = req.params.pid;    
+    var pid = req.params.pid;
     // #8 Delete a product by ID (findByIdAndDelete)
 
     // ===============================
