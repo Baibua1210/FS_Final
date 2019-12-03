@@ -1,13 +1,13 @@
 // call the packages we need
 // #1 Add express package to the app
-
+var express = require('express');
 // ===============================
 
-var app = express();   
-var cors = require('cors');       
+var app = express();
+var cors = require('cors');
 
 // #2 Add body-parser package to the app
-
+var bodyParser = require('body-parser');
 // ===============================
 
 
@@ -18,11 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // #3 Serve static content in folder frontend
-
+app.use(express.static('www'));
 // ===============================
 
 
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 8080;
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -33,7 +33,14 @@ router.get('/products', products.getAllProducts);
 router.get('/products/:pid', products.getProductById);
 
 // #4 Complete the routing for POST, PUT, DELETE
-
+app.post('/api/products', function (req, res) {
+    var newproduct = req.body;
+    var product = new Product(newproduct);
+    product.save(function (err){
+        if (err) res.status(500).json(err);
+        res.json({status: "Added a product"});
+    });
+});
 // ===============================
 
 
@@ -42,6 +49,7 @@ router.get('/products/:pid', products.getProductById);
 app.use('/api', cors(), router);
 
 // #10 Start the server
-
-// ===============================
-console.log('Magic happens on http://localhost:' + port);
+app.listen(port, function () {
+    // ===============================
+    console.log('Magic happens on http://localhost:' + port);
+});
