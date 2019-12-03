@@ -55,7 +55,10 @@ $(function () {
 
         // #13 Add new products by calling api
         // use $.post
-
+        $.post(url, {newprodunt}, function(result){
+            $("span").html(result);
+            
+        });
         // ===============================
 
     });
