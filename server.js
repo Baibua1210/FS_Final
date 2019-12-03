@@ -31,16 +31,10 @@ var router = express.Router();              // get an instance of the express Ro
 var products = require('./api');
 router.get('/products', products.getAllProducts);
 router.get('/products/:pid', products.getProductById);
-
 // #4 Complete the routing for POST, PUT, DELETE
-app.post('/api/products', function (req, res) {
-    var newproduct = req.body;
-    var product = new Product(newproduct);
-    product.save(function (err){
-        if (err) res.status(500).json(err);
-        res.json({status: "Added a product"});
-    });
-});
+router.post('/products', products.addProduct);
+router.put('/products/:pid', products.updateProductById);
+router.delete('/products/:pid', products.deleteProductById);
 // ===============================
 
 
